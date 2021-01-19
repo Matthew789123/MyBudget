@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MyBudget</string>
+    <string name="records">Zapis</string>
+    <string name="currency">zł</string>
+    <string name="amount">Kwota</string>
+    <string name="amount_hint">0.00</string>
+    <string name="select_category">Wybierz kategorię</string>
+    <string name="note">Notatka</string>
+    <string name="note_hint">Wpisz tu swoją notatkę</string>
+    <string name="save">Zapisz</string>
+    <string name="invalid_amount">Wprowadź poprawną kwotę</string>
+    <string name="invalid_category">Wybierz kategorie</string>
+    <string name="expenses">Wydatki</string>
+    <string name="budget">Budżet</string>
+    <string name="current_budget">Obecny budżet</string>
+    <string name="add_to_budget">Dodaj do budżetu</string>
+    <string name="subtract_from_budget">Odejmij od budżetu</string>
+    <string-array name="spinnerDates">
+        <item>Dzień</item>
+        <item>Miesiąc</item>
+        <item>Rok</item>
+    </string-array>
+    <string name="food">Jedzenie</string>
+    <string name="travel">Podróż</string>
+    <string name="living">Utrzymanie</string>
+    <string name="car">Samochód</string>
+    <string name="clothing">Ubrania</string>
+    <string name="entertainment">Rozrywka</string>
+    <string name="fee">Opłata</string>
+    <string name="investment">Inwestycja</string>
+    <string name="others">Inne</string>
+    <string name="mic_prompt">Podaj wartość</string>
+</resources>

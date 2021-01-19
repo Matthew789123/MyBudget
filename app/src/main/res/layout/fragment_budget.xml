@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/budget_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/current_budget"
+        android:layout_marginLeft="@dimen/small_margin"
+        android:layout_marginTop="@dimen/small_margin"
+        android:textStyle="bold"
+        android:textSize="@dimen/category_font_size"/>
+
+    <TextView
+        android:id="@+id/budget_value_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/budget_text_view"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/medium_margin"
+        android:textSize="@dimen/category_font_size"
+        android:textColor="@color/green"
+        android:textStyle="bold" />
+
+    <View
+        android:id="@+id/budget_line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_size"
+        android:background="@color/blue_grey"
+        android:layout_below="@id/budget_value_text_view"
+        android:layout_marginHorizontal="@dimen/medium_margin"/>
+
+    <TextView
+        android:id="@+id/add_budget_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_to_budget"
+        android:layout_marginLeft="@dimen/small_margin"
+        android:layout_marginTop="@dimen/small_margin"
+        android:layout_below="@id/budget_line"
+        android:textStyle="bold"
+        android:textSize="@dimen/category_font_size"/>
+
+    <EditText
+        android:id="@+id/add_budget_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/add_budget_text_view"
+        android:inputType="numberDecimal"
+        android:layout_marginLeft="@dimen/small_margin"
+        android:layout_marginRight="@dimen/big_margin"
+        android:gravity="right"
+        android:textSize="@dimen/category_font_size"
+        android:textColor="@color/green"
+        android:textStyle="bold"
+        android:hint="@string/amount_hint"/>
+
+    <ImageView
+        android:id="@+id/mic_add"
+        android:layout_width="@dimen/mic_size"
+        android:layout_height="@dimen/mic_size"
+        android:src="@drawable/ic_baseline_mic_24"
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@id/add_budget_edit_text"
+        android:layout_marginRight="@dimen/smallest_margin" />
+
+    <TextView
+        android:id="@+id/subtract_budget_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/subtract_from_budget"
+        android:layout_marginLeft="@dimen/small_margin"
+        android:layout_marginTop="@dimen/small_margin"
+        android:layout_below="@id/add_budget_edit_text"
+        android:textStyle="bold"
+        android:textSize="@dimen/category_font_size"/>
+
+    <EditText
+        android:id="@+id/subtract_budget_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/subtract_budget_text_view"
+        android:inputType="numberDecimal"
+        android:layout_marginLeft="@dimen/small_margin"
+        android:layout_marginRight="@dimen/big_margin"
+        android:gravity="right"
+        android:textSize="@dimen/category_font_size"
+        android:textColor="@color/green"
+        android:textStyle="bold"
+        android:hint="@string/amount_hint"/>
+
+    <ImageView
+        android:id="@+id/mic_subtract"
+        android:layout_width="@dimen/mic_size"
+        android:layout_height="@dimen/mic_size"
+        android:src="@drawable/ic_baseline_mic_24"
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@id/subtract_budget_edit_text"
+        android:layout_marginRight="@dimen/smallest_margin" />
+
+</RelativeLayout>

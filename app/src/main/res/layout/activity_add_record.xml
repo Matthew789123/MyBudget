@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/record_relative_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/amount_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/amount"
+        android:layout_marginTop="@dimen/small_margin"
+        android:layout_marginLeft="@dimen/small_margin"/>
+
+    <EditText
+        android:id="@+id/amount_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/small_margin"
+        android:layout_marginRight="@dimen/big_margin"
+        android:layout_below="@id/amount_text_view"
+        android:hint="@string/amount_hint"
+        android:inputType="numberDecimal" />
+
+    <ImageView
+        android:id="@+id/mic_amount"
+        android:layout_width="@dimen/mic_size"
+        android:layout_height="@dimen/mic_size"
+        android:src="@drawable/ic_baseline_mic_24"
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@id/amount_edit_text"
+        android:layout_marginRight="@dimen/smallest_margin" />
+
+    <Button
+        android:id="@+id/select_category_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/amount_edit_text"
+        android:layout_marginHorizontal="@dimen/small_margin"
+        android:text="@string/select_category"
+        android:textAlignment="viewStart"
+        android:layout_gravity="start"
+        android:drawableRight="@drawable/ic_baseline_arrow_forward_ios_24"
+        android:layout_marginTop="@dimen/smallest_margin"
+        android:backgroundTint="@color/blue_grey"/>
+
+    <TextView
+        android:id="@+id/note_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/note"
+        android:layout_marginTop="@dimen/small_margin"
+        android:layout_marginLeft="@dimen/small_margin"
+        android:layout_below="@id/select_category_button"/>
+
+    <EditText
+        android:id="@+id/note_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/note_height"
+        android:layout_below="@id/note_text_view"
+        android:layout_marginHorizontal="@dimen/small_margin"
+        android:hint="@string/note_hint"
+        android:inputType="textMultiLine"
+        android:gravity="top" />
+
+    <ImageView
+        android:id="@+id/mic_note"
+        android:layout_width="@dimen/mic_size"
+        android:layout_height="@dimen/mic_size"
+        android:src="@drawable/ic_baseline_mic_24"
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@id/note_edit_text"
+        android:layout_marginRight="@dimen/smallest_margin"
+        android:layout_marginBottom="@dimen/small_margin"/>
+
+    <ImageButton
+        android:id="@+id/photo_image_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/note_edit_text"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:layout_marginLeft="@dimen/small_margin"
+        android:src="@drawable/ic_baseline_add_a_photo_24"/>
+
+    <ImageView
+        android:id="@+id/photo_image_view"
+        android:layout_width="@dimen/photo_size"
+        android:layout_height="@dimen/photo_size"
+        android:layout_below="@id/note_edit_text"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:scaleType="centerInside"
+        android:adjustViewBounds="true"/>
+
+    <Button
+        android:id="@+id/save_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:backgroundTint="@color/blue_grey"
+        android:text="@string/save" />
+
+
+</RelativeLayout>

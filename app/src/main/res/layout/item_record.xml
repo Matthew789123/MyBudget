@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginHorizontal="@dimen/smallest_margin"
+    android:layout_marginTop="@dimen/smallest_margin"
+    app:cardElevation="@dimen/smallest_margin"
+    app:cardCornerRadius="@dimen/smallest_margin">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/small_margin">
+
+        <ImageView
+            android:id="@+id/category_image_view"
+            android:layout_width="@dimen/image_size"
+            android:layout_height="@dimen/image_size"
+            android:layout_marginLeft="@dimen/smallest_margin" />
+
+        <TextView
+            android:id="@+id/category_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/category_image_view"
+            android:layout_marginLeft="@dimen/smallest_margin"/>
+
+        <TextView
+            android:id="@+id/date_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/category_image_view"
+            android:layout_below="@id/category_text_view"
+            android:layout_marginLeft="@dimen/smallest_margin" />
+
+        <TextView
+            android:id="@+id/price_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/smallest_margin"/>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
