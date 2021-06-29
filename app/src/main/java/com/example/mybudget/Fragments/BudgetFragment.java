@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,9 +30,9 @@ import java.util.Locale;
 
 public class BudgetFragment extends Fragment {
 
-    private EditText addBudget, subtractBudget;
+    private EditText addBudget, subtractBudget, monthlyIncome;
     private TextView currentBudgetText;
-    private ImageView micAdd, micSubtract;
+    private ImageView micAdd, micSubtract, micMonthly;
     private DatabaseViewModel db;
     private Budget currentBudget;
     private DecimalFormat decimalFormatter;
@@ -42,9 +44,23 @@ public class BudgetFragment extends Fragment {
 
         addBudget = view.findViewById(R.id.add_budget_edit_text);
         subtractBudget = view.findViewById(R.id.subtract_budget_edit_text);
+        monthlyIncome = view.findViewById(R.id.monthly_income_edit_text);
         currentBudgetText = view.findViewById(R.id.budget_value_text_view);
         micAdd = view.findViewById(R.id.mic_add);
         micSubtract = view.findViewById(R.id.mic_subtract);
+        micMonthly = view.findViewById(R.id.mic_monthly);
+
+        monthlyIncome.setOnKeyListener((v, keyCode, event) -> {
+            if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER && !(monthlyIncome.getText().toString().equals("") || monthlyIncome.getText().toString().equals("."))) {
+                String amountString = decimalFormatter.format(Double.parseDouble(monthlyIncome.getText().toString()));
+                amountString = amountString.replace(',', '.');
+                Double amount = Double.parseDouble(amountString);
+                currentBudget.setMonthlyIncome(amount);
+                db.updateBudget(currentBudget);
+                return true;
+            }
+            return false;
+        });
 
         addBudget.setOnKeyListener((v, keyCode, event) -> {
             if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER && !(addBudget.getText().toString().equals("") || addBudget.getText().toString().equals("."))) {
@@ -79,6 +95,7 @@ public class BudgetFragment extends Fragment {
             public void onChanged(Budget budget) {
                 currentBudget = budget;
                 currentBudgetText.setText(decimalFormatter.format(currentBudget.getBudget()));
+                monthlyIncome.setText(decimalFormatter.format(currentBudget.getMonthlyIncome()));
             }
         });
 
@@ -88,6 +105,10 @@ public class BudgetFragment extends Fragment {
 
         micSubtract.setOnClickListener(v -> {
             startActivityForResult(createMicIntent(), 200);
+        });
+
+        micMonthly.setOnClickListener(v -> {
+            startActivityForResult(createMicIntent(), 300);
         });
 
         return view;
@@ -110,8 +131,15 @@ public class BudgetFragment extends Fragment {
 
             if (requestCode == 100)
                 addBudget.setText(res);
-            else
+            else if (requestCode == 200)
                 subtractBudget.setText(res);
+            else if (requestCode == 300) {
+                String amountString = decimalFormatter.format(Double.parseDouble(res));
+                amountString = amountString.replace(',', '.');
+                Double amount = Double.parseDouble(amountString);
+                currentBudget.setMonthlyIncome(amount);
+                db.updateBudget(currentBudget);
+            }
         }
     }
 

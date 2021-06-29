@@ -13,9 +13,15 @@ public class Budget {
 
     private double budget = 0;
 
+    private double monthlyIncome = 0;
+
     public double getBudget() { return budget; }
 
     public void setBudget(double budget) { this.budget = budget; }
+
+    public double getMonthlyIncome() { return monthlyIncome; }
+
+    public void setMonthlyIncome(double monthlyIncome) { this.monthlyIncome = monthlyIncome; }
 
     public int getId() { return id; }
 

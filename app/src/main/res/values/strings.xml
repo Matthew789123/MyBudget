@@ -22,6 +22,7 @@
     <string name="budget">Budget</string>
 
     <string name="current_budget">Current budget</string>
+    <string name="monthly_income">Monthly income</string>
     <string name="add_to_budget">Add to budget</string>
     <string name="subtract_from_budget">Subtract from budget</string>
 
