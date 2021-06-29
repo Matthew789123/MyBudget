@@ -44,19 +44,21 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+        //getApplicationContext().deleteDatabase("mybudget_database");
         DatabaseViewModel db = ViewModelProviders.of(this).get(DatabaseViewModel.class);
-        if (db.getBudget().getValue() == null)
+        if (db.getRawBudget() == null) {
             db.newBudget(new Budget());
+            db.newCategory(new Category(getResources().getString(R.string.food), R.drawable.food));
+            db.newCategory(new Category(getResources().getString(R.string.travel), R.drawable.travel));
+            db.newCategory(new Category(getResources().getString(R.string.living), R.drawable.living));
+            db.newCategory(new Category(getResources().getString(R.string.car), R.drawable.car));
+            db.newCategory(new Category(getResources().getString(R.string.clothing), R.drawable.clothing));
+            db.newCategory(new Category(getResources().getString(R.string.entertainment), R.drawable.entertainment));
+            db.newCategory(new Category(getResources().getString(R.string.fee), R.drawable.fee));
+            db.newCategory(new Category(getResources().getString(R.string.investment), R.drawable.investment));
+            db.newCategory(new Category(getResources().getString(R.string.others), R.drawable.others));
+        }
 
-        categories = new Category[]{new Category(getResources().getString(R.string.food), R.drawable.food),
-                new Category(getResources().getString(R.string.travel), R.drawable.travel),
-                new Category(getResources().getString(R.string.living), R.drawable.living),
-                new Category(getResources().getString(R.string.car), R.drawable.car),
-                new Category(getResources().getString(R.string.clothing), R.drawable.clothing),
-                new Category(getResources().getString(R.string.entertainment), R.drawable.entertainment),
-                new Category(getResources().getString(R.string.fee), R.drawable.fee),
-                new Category(getResources().getString(R.string.investment), R.drawable.investment),
-                new Category(getResources().getString(R.string.others), R.drawable.others)};
     }
 
     @Override

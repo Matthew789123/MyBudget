@@ -11,26 +11,43 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mybudget.Database.DatabaseViewModel;
 import com.example.mybudget.Models.Category;
 import com.example.mybudget.R;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class SelectCategoryActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private CategoryAdapter adapter;
+    private DatabaseViewModel db;
+    private List<Category> categoriesList;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_category);
 
+        db = ViewModelProviders.of(this).get(DatabaseViewModel.class);
+
         recyclerView = findViewById(R.id.category_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         adapter = new CategoryAdapter();
-        recyclerView.setAdapter(adapter);
+
+        db.getCategories().observe(this, new Observer<List<Category>>() {
+            @Override
+            public void onChanged(List<Category> categories) {
+                categoriesList = categories;
+                recyclerView.setAdapter(adapter);
+            }
+        });
     }
 
     private class CategoryHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -72,12 +89,12 @@ public class SelectCategoryActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(@NonNull CategoryHolder holder, int position) {
-            holder.bind(MainActivity.categories[position]);
+            holder.bind(categoriesList.get(position));
         }
 
         @Override
         public int getItemCount() {
-            return MainActivity.categories.length;
+            return categoriesList.size();
         }
     }
 }

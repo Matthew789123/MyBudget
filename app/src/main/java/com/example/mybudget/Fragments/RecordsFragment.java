@@ -57,6 +57,7 @@ public class RecordsFragment extends Fragment implements AdapterView.OnItemSelec
     private int type = Record.Day;
     private FloatingActionButton addFloatingButton;
     private DecimalFormat decimalFormatter;
+    private List<Category> categoriesList = new LinkedList<>();
 
     @Nullable
     @Override
@@ -95,6 +96,13 @@ public class RecordsFragment extends Fragment implements AdapterView.OnItemSelec
             public void onChanged(List<Record> records) {
                 recordsList = records;
                 adapter.setRecords(records);
+            }
+        });
+
+        db.getCategories().observe(getViewLifecycleOwner(), new Observer<List<Category>>() {
+            @Override
+            public void onChanged(List<Category> categories) {
+                categoriesList = categories;
             }
         });
 
@@ -155,10 +163,10 @@ public class RecordsFragment extends Fragment implements AdapterView.OnItemSelec
         }
 
         public void bind(Record record) {
-            categoryText.setText(MainActivity.categories[record.getCategoryId()].getName());
+            categoryText.setText(categoriesList.get(record.getCategoryId()).getName());
             dateText.setText(formatter.format(record.getDate()));
             priceText.setText(getResources().getString(R.string.currency) + record.getPrice());
-            categoryImage.setImageResource(MainActivity.categories[record.getCategoryId()].getIcon());
+            categoryImage.setImageResource(categoriesList.get(record.getCategoryId()).getIcon());
             this.record = record;
         }
 

@@ -33,6 +33,8 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Locale;
 
 public abstract class AbstractRecordActivity extends AppCompatActivity {
@@ -47,6 +49,7 @@ public abstract class AbstractRecordActivity extends AppCompatActivity {
     protected String photoPath;
     public static final String DATE_EXTRA = "date_extra", TYPE_EXTRA = "type_extra", CATEGORY_ID_EXTRA = "category_id_extra", RECORD_EXTRA = "record_extra";
     protected DatabaseViewModel db;
+    private List<Category> categoriesList = new LinkedList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -68,6 +71,13 @@ public abstract class AbstractRecordActivity extends AppCompatActivity {
             @Override
             public void onChanged(Budget myBudget) {
                 budget = myBudget;
+            }
+        });
+
+        db.getCategories().observe(this, new Observer<List<Category>>() {
+            @Override
+            public void onChanged(List<Category> categories) {
+                categoriesList = categories;
             }
         });
 
@@ -118,8 +128,8 @@ public abstract class AbstractRecordActivity extends AppCompatActivity {
 
         if (requestCode == 100 && resultCode == Activity.RESULT_OK) {
             categoryId = data.getIntExtra(CATEGORY_ID_EXTRA, 0);
-            categoryButton.setText(MainActivity.categories[categoryId].getName());
-            categoryButton.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(MainActivity.categories[categoryId].getIcon()), null, getResources().getDrawable(R.drawable.ic_baseline_arrow_forward_ios_24), null);
+            categoryButton.setText(categoriesList.get(categoryId).getName());
+            categoryButton.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(categoriesList.get(categoryId).getIcon()), null, getResources().getDrawable(R.drawable.ic_baseline_arrow_forward_ios_24), null);
         } else if (requestCode == 200 && resultCode == Activity.RESULT_OK) {
             savePhoto();
             photoView.setImageURI(photoUri);

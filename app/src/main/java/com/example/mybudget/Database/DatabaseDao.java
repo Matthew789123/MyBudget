@@ -9,6 +9,7 @@ import androidx.room.Query;
 import androidx.room.Update;
 
 import com.example.mybudget.Models.Budget;
+import com.example.mybudget.Models.Category;
 import com.example.mybudget.Models.Record;
 
 import java.util.List;
@@ -36,4 +37,13 @@ public interface DatabaseDao {
 
     @Query("Select * From budget")
     public LiveData<Budget> getBudget();
+
+    @Query("Select * From budget")
+    public Budget getRawBudget();
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    public void newCategory(Category category);
+
+    @Query("Select * From category")
+    public LiveData<List<Category>> getCategories();
 }

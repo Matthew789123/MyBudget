@@ -10,13 +10,14 @@ import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.mybudget.Models.Budget;
+import com.example.mybudget.Models.Category;
 import com.example.mybudget.Models.Record;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@androidx.room.Database(entities = {Record.class, Budget.class}, version = 1, exportSchema = false)
+@androidx.room.Database(entities = {Record.class, Budget.class, Category.class}, version = 1, exportSchema = false)
 @TypeConverters({Converter.class})
 public abstract class Database extends RoomDatabase {
 

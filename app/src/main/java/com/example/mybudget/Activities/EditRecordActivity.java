@@ -37,6 +37,7 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class EditRecordActivity extends AbstractRecordActivity {
 
@@ -55,8 +56,14 @@ public class EditRecordActivity extends AbstractRecordActivity {
             photoView.setImageURI(photoUri);
         }
 
-        categoryButton.setText(MainActivity.categories[categoryId].getName());
-        categoryButton.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(MainActivity.categories[categoryId].getIcon()), null, getResources().getDrawable(R.drawable.ic_baseline_arrow_forward_ios_24), null);
+        db.getCategories().observe(this, new Observer<List<Category>>() {
+            @Override
+            public void onChanged(List<Category> categories) {
+                categoryButton.setText(categories.get(categoryId).getName());
+                categoryButton.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(categories.get(categoryId).getIcon()), null, getResources().getDrawable(R.drawable.ic_baseline_arrow_forward_ios_24), null);
+            }
+        });
+
         amountEditText.setText(Double.toString(record.getPrice()));
         noteEditText.setText(record.getNote());
 
