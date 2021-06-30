@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private DrawerLayout drawer;
     private NavigationView navigationView;
-    private DatabaseViewModel db;
+    private static DatabaseViewModel db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,21 +71,19 @@ public class MainActivity extends AppCompatActivity {
             db.newCategory(new Category(getResources().getString(R.string.investment), R.drawable.investment));
             db.newCategory(new Category(getResources().getString(R.string.others), R.drawable.others));
 
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTimeInMillis(System.currentTimeMillis());
-            calendar.set(Calendar.MINUTE, 40);
-
             ComponentName receiver = new ComponentName(getApplicationContext(), AlarmReceiver.class);
             PackageManager pm = getApplicationContext().getPackageManager();
             pm.setComponentEnabledSetting(receiver, PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
 
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(calendar.get(Calendar.YEAR), (calendar.get(Calendar.MONTH) + 1) % 12, 1, 0, 0, 0);
+
             AlarmManager alarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
             Intent intent = new Intent(getApplicationContext(), AlarmReceiver.class);
             PendingIntent alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
-            alarm.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_FIFTEEN_MINUTES, alarmIntent);
-        }
 
-        registerReceiver(broadcastReceiver, new IntentFilter("MONTH_PASSED"));
+            alarm.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), alarmIntent);
+        }
     }
 
     @Override
@@ -95,18 +93,9 @@ public class MainActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
-    BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            Budget budget = db.getRawBudget();
-            budget.setBudget(budget.getBudget() + budget.getMonthlyIncome());
-            db.updateBudget(budget);
-        }
-    };
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        unregisterReceiver(broadcastReceiver);
+    public static void month_passed() {
+        Budget budget = db.getRawBudget();
+        budget.setBudget(budget.getBudget() + budget.getMonthlyIncome());
+        db.updateBudget(budget);
     }
 }
