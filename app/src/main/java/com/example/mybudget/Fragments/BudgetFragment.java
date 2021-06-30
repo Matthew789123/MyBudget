@@ -52,7 +52,7 @@ public class BudgetFragment extends Fragment {
 
         monthlyIncome.setOnKeyListener((v, keyCode, event) -> {
             if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER && !(monthlyIncome.getText().toString().equals("") || monthlyIncome.getText().toString().equals("."))) {
-                String amountString = decimalFormatter.format(Double.parseDouble(monthlyIncome.getText().toString()));
+                String amountString = decimalFormatter.format(Double.parseDouble(monthlyIncome.getText().toString().replace(',', '.')));
                 amountString = amountString.replace(',', '.');
                 Double amount = Double.parseDouble(amountString);
                 currentBudget.setMonthlyIncome(amount);
